@@ -35,7 +35,7 @@ export const appRoutes: Routes = [
       RouterModule.forRoot(
       appRoutes,
       //pour afficher les traces dans les logges
-      {enableTracing: true}
+      {enableTracing: false}
     )
   ],
   exports: [RouterModule],

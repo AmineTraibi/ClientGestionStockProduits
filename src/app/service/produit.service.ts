@@ -12,19 +12,22 @@ export class ProduitService{
   constructor(private http:HttpClient){}
 
   getProduits(): Observable<any>{
+    console.log(API_URLS.PRODUITS_URL)
    return this.http.get(API_URLS.PRODUITS_URL);
   }
 
   addProduct(produit: Produit): Observable<any>{
+    console.log(API_URLS.PRODUITS_URL+'/add', produit)
   return this.http.post(API_URLS.PRODUITS_URL+'/add', produit);
   }
 
   updateProduct(produit: Produit): Observable<any>{
+    console.log(API_URLS.PRODUITS_URL+'/update', produit)
   return this.http.put(API_URLS.PRODUITS_URL+'/update', produit);
   }
 
-  deleteProduct(ref: string): Observable<any>{
-    console.log(API_URLS.PRODUITS_URL+'/delete/'+ref)
-  return this.http.delete(API_URLS.PRODUITS_URL+'/delete/'+ref);
+  deleteProduct(id: number): Observable<any>{
+    console.log(API_URLS.PRODUITS_URL+'/delete/'+id)
+  return this.http.delete(API_URLS.PRODUITS_URL+'/delete/'+id);
   }
 }

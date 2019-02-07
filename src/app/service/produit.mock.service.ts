@@ -15,7 +15,7 @@ export class ProduitMockService {
     this.PRODUITS.push(p1);
     this.PRODUITS.push(p2);
     this.PRODUITS.push(p3);
-  
+
 
   }
 

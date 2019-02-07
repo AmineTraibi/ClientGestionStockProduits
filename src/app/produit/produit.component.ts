@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProduitService } from '../produit/produit.service'
+import { ProduitService } from '../service/produit.service';
 import {Produit} from '../shared/produit.model';
 import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -37,8 +37,16 @@ export class ProduitComponent implements OnInit {
   ngOnInit() {
     this.initProduit();
     this.produits=this.route.snapshot.data.produits;
+    this.IsSizeNull();
     //this.loadProduits();
     //this.produits = this.produitService.getProduits();
+  }
+
+  IsSizeNull(){
+    if(this.produits.length==0){
+      return true;
+    }
+      return false;
   }
 
   initProduit(){
@@ -49,10 +57,12 @@ export class ProduitComponent implements OnInit {
 
   loadProduits(){
    this.produitService.getProduits().subscribe(
-     data => {this.produits = data
-     console.log("response",data)},
+     data => {this.produits = data;
+       console.log("response",data)},
      error => {console.log('an error was occured')},
-     () => {console.log('loading produits was done')}
+     () => {
+       this.IsSizeNull();
+       console.log('loading produits was done')}
    );
   }
 
@@ -77,7 +87,7 @@ export class ProduitComponent implements OnInit {
   }
 
   deleteProduit(){
-    this.produitService.deleteProduct(this.selectedProduit.ref).subscribe(
+    this.produitService.deleteProduct(this.selectedProduit.id).subscribe(
     resultat =>{
       this.selectedProduit = new Produit();
       this.loadProduits();
